@@ -1,0 +1,30 @@
+table, th, td {
+  border: 1px solid var(--color);
+  text-align: center;
+  font-size: 1rem;
+}
+
+table {
+  width: 90vw;
+}
+
+th {
+  font-size: 1.2em;
+}
+
+th, td {
+  padding: .5em;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+
+  padding: 1em;
+
+  button {
+    padding: .5em;
+    font-size: 1em;
+    border: 1px solid gray;
+  }
+}

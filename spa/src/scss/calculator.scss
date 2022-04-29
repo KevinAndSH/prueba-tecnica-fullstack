@@ -1,0 +1,61 @@
+.form {
+  --box-shadow: 0 0 .5em var(--color);
+  border: 3px solid var(--color);
+  border-radius: 1em;
+  padding: 2em;
+  width: min(90vw, 50em);
+  box-shadow: var(--box-shadow), inset var(--box-shadow);
+
+  display: flex;
+  flex-flow: column;
+  gap: 1em;
+  align-items: center;
+
+  &--input {
+    padding: .15em;
+    width: 100%;
+    font-size: 3rem;
+    font-family: "VT323", monospace;
+    text-align: end;
+  }
+
+  &--btn {
+    font-size: 1.5rem;
+    padding: .75em 1.5em;
+    margin-block: 1.2em;
+    border: none;
+    border-radius: 9999px;
+  }
+}
+
+.result {
+  width: 100%;
+  min-height: 2em;
+  padding: .15em;
+  font-size: 3rem;
+  font-family: "VT323", monospace;
+  border: 1px solid blue;
+
+  overflow-x: scroll;
+
+  display: grid;
+  place-content: center;
+
+  &::-webkit-scrollbar {
+    width: .25rem;
+
+    &-thumb {
+      border-radius: 1em;
+      background-color: hsl(0, 0, 100, .1);
+    }
+  }
+}
+
+.history-link {
+  color: hsl(211, 95, 71);
+  transition: .2s;
+
+  &:hover {
+    text-shadow: 0 0 1em hsl(211, 95, 71);
+  }
+}

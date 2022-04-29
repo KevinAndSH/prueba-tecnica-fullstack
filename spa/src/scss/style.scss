@@ -1,0 +1,23 @@
+:root {
+  color-scheme: dark;
+  height: 100%;
+  --color: skyblue;
+}
+
+body {
+  height: 100%;
+  font-family: "Open Sans", sans-serif;
+  font-size: 2rem;
+}
+
+#root {
+  height: 100%;
+  display: grid;
+  place-content: center;
+}
+
+[data-text] {
+  &::after {
+    content: attr(data-text);
+  }
+}
