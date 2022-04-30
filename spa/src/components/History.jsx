@@ -1,37 +1,55 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function History() {
   const url = "https://bigint-api.herokuapp.com/records"
 
-  const [records, setRecords] = useState(null)
-  const [page, setPage] = useState(1)
-  const [amount, setAmount] = useState(10)
+  const [endpoint, setEndpoint] = useState(url)
+  const [records, setRecords] = useState([])
+  const [isLoading, setLoading] = useState(false)
   const [prevLink, setPrevLink] = useState(null)
   const [nextLink, setNextLink] = useState(null)
+  const [message, setMessage] = useState("No history")
 
   useEffect(() => {
-    setRecords(null)
-    fetch(`${url}?page=${page}&amount=${amount}`)
+    setRecords([])
+    setLoading(true)
+    fetch(endpoint)
       .then(res => res.json())
       .then(data => {
         setRecords(data.data.entries)
         setPrevLink(data.prev)
         setNextLink(data.next)
       })
-  }, [amount, page])
+      .catch(err => {
+        console.error(err)
+        setMessage("Error!!")
+      })
+      .finally(() => setLoading(false))
+  }, [endpoint])
 
   const prevPage = () => {
-    setPage(page => page - 1)
+    setEndpoint(prevLink)
   }
 
   const nextPage = () => {
-    setPage(page => page + 1)
+    setEndpoint(nextLink)
   }
 
-  const deleteHistory = () => {
+  const deleteHistory = async () => {
     const assertion = window.confirm("Are you sure you want to delete history?")
-    if (assertion) {
-      fetch(url, { method: "DELETE" }).then(() => setRecords([]))
+    if (!assertion) return
+    const anotherAssertion = window.confirm("Are you really sure you want to delete history?")
+    if (!anotherAssertion) return
+    const yetAnotherAssertion = window.confirm("Are you really, REALLY sure you want to delete history?")
+    if (!yetAnotherAssertion) return
+
+    try {
+      await fetch(url, { method: "DELETE" })
+      setRecords([])
+      alert("History deleted successfully")
+    } catch (error) {
+      console.error(error)
+      alert("Error deleting history :(")
     }
   }
 
@@ -43,10 +61,10 @@ function History() {
       </div>
 
       {
-        records === null 
+        isLoading
         ?
         <div className="btn-container">
-          No history
+          Loading...
         </div>
         :
         records.length
@@ -75,7 +93,7 @@ function History() {
         </table>
         :
         <div className="btn-container">
-          No history
+          { message }
         </div> 
       }
 

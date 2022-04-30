@@ -19,7 +19,7 @@ function Calculator() {
       setResult(data.result)
     } catch (error) {
       console.error(error)
-      setResult("Error!")
+      setResult("Error!!")
     }
   }
 

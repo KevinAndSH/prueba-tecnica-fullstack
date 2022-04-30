@@ -3,7 +3,7 @@
   border: 3px solid var(--color);
   border-radius: 1em;
   padding: 2em;
-  width: min(90vw, 50em);
+  width: min(90vw, 30em);
   box-shadow: var(--box-shadow), inset var(--box-shadow);
 
   display: flex;
@@ -46,16 +46,16 @@
 
     &-thumb {
       border-radius: 1em;
-      background-color: hsl(0, 0, 100, .1);
+      background-color: hsl(0, 0%, 100%, .1);
     }
   }
 }
 
 .history-link {
-  color: hsl(211, 95, 71);
+  color: hsl(211, 95%, 71%);
   transition: .2s;
 
   &:hover {
-    text-shadow: 0 0 1em hsl(211, 95, 71);
+    text-shadow: 0 0 1em hsl(211, 95%, 71%);
   }
 }
