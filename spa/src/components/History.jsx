@@ -3,14 +3,14 @@ import React, { useEffect, useState } from 'react'
 function History() {
   const url = "https://bigint-api.herokuapp.com/records"
 
-  const [records, setRecords] = useState([])
+  const [records, setRecords] = useState(null)
   const [page, setPage] = useState(1)
   const [amount, setAmount] = useState(10)
   const [prevLink, setPrevLink] = useState(null)
   const [nextLink, setNextLink] = useState(null)
 
   useEffect(() => {
-    setRecords([])
+    setRecords(null)
     fetch(`${url}?page=${page}&amount=${amount}`)
       .then(res => res.json())
       .then(data => {
@@ -43,7 +43,14 @@ function History() {
       </div>
 
       {
-        records.length ?
+        records === null 
+        ?
+        <div className="btn-container">
+          No history
+        </div>
+        :
+        records.length
+        ?
         <table>
           <thead>
             <tr>
@@ -65,7 +72,8 @@ function History() {
               ))
             }
           </tbody>
-        </table> :
+        </table>
+        :
         <div className="btn-container">
           No history
         </div> 
