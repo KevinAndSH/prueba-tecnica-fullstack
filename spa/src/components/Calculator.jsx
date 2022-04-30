@@ -12,9 +12,15 @@ function Calculator() {
   const calculate = async e => {
     e.preventDefault()
     setResult("Calculating...")
-    const res = await fetch(`${url}?factor1=${factorRef1.current.value}&factor2=${factorRef2.current.value}`)
-    const { data } = await res.json()
-    setResult(data.result)
+
+    try {
+      const res = await fetch(`${url}?factor1=${factorRef1.current.value}&factor2=${factorRef2.current.value}`)
+      const { data } = await res.json()
+      setResult(data.result)
+    } catch (error) {
+      console.error(error)
+      setResult("Error!")
+    }
   }
 
   const nanBlock = e => {
